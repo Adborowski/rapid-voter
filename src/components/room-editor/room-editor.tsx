@@ -10,9 +10,9 @@ const RoomEditor = (props: any) => {
         "Salad",
         "Soup",
     ]);
-    const addOption = (e: FormEvent) => {
-        e.preventDefault();
-        console.log("adding option...");
+    const addOptionHandler = (name: string) => {
+        console.log("adding option...", name);
+        setVotingOptions((options) => [...options, name]);
     };
 
     return (
@@ -21,7 +21,7 @@ const RoomEditor = (props: any) => {
                 {votingOptions.map((option) => (
                     <VotingOption name={option} key={option} />
                 ))}
-                <VotingOptionAdder />
+                <VotingOptionAdder addOptionHandler={addOptionHandler} />
             </div>
         </div>
     );

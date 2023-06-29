@@ -1,3 +1,10 @@
 * {
-    font-family: "Inter";
+    font-family: "Helvetica";
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f3f3f3;
 }

@@ -1,0 +1,30 @@
+.votingOption {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    padding: 6px;
+}
+
+.votingOption input {
+    padding: 12px;
+    display: block;
+    height: 100%;
+    outline: none;
+    border: none;
+    background-color: #feffb1;
+}
+
+.votingOption span {
+    margin-left: 6px;
+    padding: 6px;
+}
+
+.votingOption input::placeholder {
+    opacity: 0.5;
+}
+
+.votingOption button {
+    display: block;
+    border: none;
+    outline: none;
+}

@@ -3,25 +3,5 @@
     max-width: 300px;
     margin: auto;
     padding: 12px;
-}
-
-.newOption {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 40px;
-}
-
-.newOption input {
-    background-color: rgb(171, 255, 150);
-    padding: 12px;
-    display: block;
-    height: 100%;
-    outline: none;
-    border: none;
-}
-
-.newOption button {
-    display: block;
-    border: none;
-    outline: none;
+    border-radius: 6px;
 }

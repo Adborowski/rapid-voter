@@ -23,6 +23,9 @@ const RoomEditor = (props: any) => {
                 ))}
                 <VotingOptionAdder addOptionHandler={addOptionHandler} />
             </div>
+            <div className={styles.controls}>
+                <button className={styles.save}>Save</button>
+            </div>
         </div>
     );
 };

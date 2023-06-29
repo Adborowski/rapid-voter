@@ -11,16 +11,22 @@ const VotingOptionAdder = (props: VotingOptionAdderProps) => {
 
     const handleNewVotingOption = (e: FormEvent) => {
         e.preventDefault();
-        if (newOptionText.current) {
+        if (newOptionText.current && newOptionText.current.value.length > 0) {
             addOptionHandler(newOptionText.current.value);
+            newOptionText.current.value = "";
         }
     };
     return (
-        <form onSubmit={handleNewVotingOption} className={styles.votingOption}>
-            <button type="submit">+</button>
+        <form
+            onSubmit={handleNewVotingOption}
+            className={`${styles.votingOption} ${styles.votingOptionAdder}`}
+        >
+            <button type="submit">
+                <span>+</span>
+            </button>
             <input
                 ref={newOptionText}
-                placeholder={"add new option"}
+                placeholder={"New voting option"}
                 name="votingOption"
                 type="text"
             />

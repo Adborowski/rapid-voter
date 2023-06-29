@@ -5,3 +5,15 @@
     padding: 12px;
     border-radius: 6px;
 }
+
+.controls {
+    /* border: 1px solid red; */
+}
+
+.save {
+    padding: 12px;
+    border: 0;
+    width: 100%;
+    margin-top: 12px;
+    border-radius: 6px;
+}

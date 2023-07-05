@@ -25,18 +25,3 @@ export async function findDoc(client: any, collectionName: string, query: {}) {
     console.log("findDoc result", document);
     return document;
 }
-
-// export async function getAllDocuments(
-//     client: any,
-//     collectionName: string,
-//     sort: any
-// ) {
-//     const db = client.db();
-//     const documents = await db
-//         .collection(collectionName) // select collection
-//         .find() // get all data
-//         .sort(sort) // sort descending by id (can be '1' as well)
-//         .toArray(); // return as array
-
-//     return documents;
-// }

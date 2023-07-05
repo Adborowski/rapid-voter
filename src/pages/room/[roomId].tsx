@@ -1,24 +1,26 @@
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 const VotingRoomPage = () => {
     const router = useRouter();
-    console.log(router.query.roomId);
 
-    const query = {
-        roomId: router.query.roomId,
-    };
+    useEffect(() => {
+        if (router.query.roomId) {
+            const apiQuery = JSON.stringify({
+                roomId: router.query.roomId,
+            });
 
-    fetch("/api/find-room", {
-        method: "POST",
-        body: JSON.stringify(query),
-        headers: {
-            "Content-Type": "application/json",
-        },
-    })
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-        });
-    return <h1>Let's vote</h1>;
+            fetch("/api/find-room", {
+                method: "POST",
+                body: apiQuery,
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                });
+        }
+    }, [router.query.roomId]);
+
+    return <div>Let's vote</div>;
 };
 
 export default VotingRoomPage;

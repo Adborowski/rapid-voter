@@ -3,8 +3,9 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { connectDatabase, insertDoc, findDoc } from "@/utils/db-util";
 
 type Data = {
-    message: string;
+    message: any;
     votingRoom?: {};
+    query?: string;
 };
 
 export default async function handler(
@@ -12,7 +13,6 @@ export default async function handler(
     res: NextApiResponse<Data>
 ) {
     let client;
-    let votingRoom;
     console.log("[api/find-room]");
 
     try {
@@ -22,17 +22,18 @@ export default async function handler(
     }
 
     try {
-        console.log("req.body", req.body);
-        votingRoom = await findDoc(client, "voting-rooms", {
-            roomId: "b5190058-f6b3-4b1f-9885-baefbc66e7e4",
+        const query = JSON.parse(req.body);
+        console.log(req.body);
+        let votingRoom = await findDoc(client, "voting-rooms", query);
+        res.status(200).json({
+            message: "Room found",
+            votingRoom: votingRoom,
         });
     } catch (e) {
-        res.status(500).json({ message: "Could not insert document." });
-    }
-
-    if (votingRoom) {
-        res.status(200).json({ message: "Room found", votingRoom: votingRoom });
-    } else {
-        res.status(404).json({ message: "No room found with this ID." });
+        res.status(404).json({
+            query: req.body,
+            message: e,
+        });
+        return;
     }
 }

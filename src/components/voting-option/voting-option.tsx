@@ -10,15 +10,17 @@ const VotingOption = (props: VotingOptionProps) => {
     const { name, removable, removeOptionHandler } = props;
 
     return (
-        <label htmlFor={name} className={styles.votingOption}>
-            {removeOptionHandler && (
-                <button
-                    type="button"
-                    className={styles.btnRemoveOption}
-                    onClick={() => {
-                        removeOptionHandler(name);
-                    }}
-                >
+        <label
+            htmlFor={name}
+            className={`${styles.votingOption} ${
+                removable ? styles.removable : ""
+            }`}
+            onClick={() => {
+                removeOptionHandler ? removeOptionHandler(name) : "";
+            }}
+        >
+            {removable && (
+                <button type="button" className={styles.btnRemoveOption}>
                     <span>-</span>
                 </button>
             )}

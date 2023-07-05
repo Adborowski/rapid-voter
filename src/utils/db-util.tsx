@@ -17,6 +17,15 @@ export async function insertDoc(
     await db.collection(collectionName).insertOne(document);
 }
 
+export async function findDoc(client: any, collectionName: string, query: {}) {
+    console.log("[findDoc]");
+    const db = client.db("rapid-voter");
+    const document = await db.collection(collectionName).findOne(query);
+    console.log("findDoc query", query);
+    console.log("findDoc result", document);
+    return document;
+}
+
 // export async function getAllDocuments(
 //     client: any,
 //     collectionName: string,

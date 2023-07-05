@@ -5,14 +5,13 @@ import VotingOptionAdder from "../voting-option/voting-option-adder";
 import { v4 as uuidv4 } from "uuid";
 
 const RoomEditor = (props: any) => {
-    console.log(props);
     const [votingOptions, setVotingOptions] = useState<string[]>([]);
 
     const addOptionHandler = (newOption: string) => {
         if (!votingOptions.includes(newOption)) {
             setVotingOptions((options) => [...options, newOption]);
         } else {
-            console.error("ERROR: Option", name, "already exists.");
+            console.error("ERROR: Option ", newOption, " already exists.");
         }
     };
 
@@ -24,12 +23,11 @@ const RoomEditor = (props: any) => {
 
     const createVotingRoom = (votingOptions: string[]) => {
         const newRoom = {
+            roomName: `Sample Room ${Math.floor(Math.random() * 10000)}`,
             creationTime: Date.now(),
             roomId: uuidv4(),
             votingOptions: votingOptions,
         };
-
-        console.log(newRoom);
 
         fetch("/api/create-room", {
             method: "POST",
@@ -40,7 +38,7 @@ const RoomEditor = (props: any) => {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log("api/create-room res", data);
+                console.log("Voting room created", data);
             });
     };
 

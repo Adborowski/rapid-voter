@@ -2,8 +2,10 @@ import { FormEvent, useState } from "react";
 import styles from "./room-editor.module.css";
 import VotingOption from "../voting-option/voting-option";
 import VotingOptionAdder from "../voting-option/voting-option-adder";
+import { v4 as uuidv4 } from "uuid";
 
 const RoomEditor = (props: any) => {
+    console.log(props);
     const [votingOptions, setVotingOptions] = useState<string[]>([]);
 
     const addOptionHandler = (newOption: string) => {
@@ -20,6 +22,28 @@ const RoomEditor = (props: any) => {
         );
     };
 
+    const createVotingRoom = (votingOptions: string[]) => {
+        const newRoom = {
+            creationTime: Date.now(),
+            roomId: uuidv4(),
+            votingOptions: votingOptions,
+        };
+
+        console.log(newRoom);
+
+        fetch("/api/create-room", {
+            method: "POST",
+            body: JSON.stringify(newRoom),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("api/create-room res", data);
+            });
+    };
+
     return (
         <div className={styles.roomEditor}>
             <div className={styles.votingOptions}>
@@ -34,7 +58,14 @@ const RoomEditor = (props: any) => {
                 <VotingOptionAdder addOptionHandler={addOptionHandler} />
             </div>
             <div className={styles.controls}>
-                <button className={styles.save}>Save</button>
+                <button
+                    onClick={() => {
+                        createVotingRoom(votingOptions);
+                    }}
+                    className={styles.save}
+                >
+                    Save
+                </button>
             </div>
         </div>
     );

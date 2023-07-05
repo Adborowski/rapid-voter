@@ -4,22 +4,27 @@ import VotingOption from "../voting-option/voting-option";
 import VotingOptionAdder from "../voting-option/voting-option-adder";
 
 const RoomEditor = (props: any) => {
-    const [votingOptions, setVotingOptions] = useState([
-        "Pizza",
-        "Pasta",
-        "Salad",
-        "Soup",
-    ]);
+    const [votingOptions, setVotingOptions] = useState<string[]>([]);
+
     const addOptionHandler = (name: string) => {
         console.log("adding option...", name);
         setVotingOptions((options) => [...options, name]);
+    };
+
+    const removeOptionHandler = () => {
+        console.log("removing option...");
     };
 
     return (
         <div className={styles.roomEditor}>
             <div className={styles.votingOptions}>
                 {votingOptions.map((option) => (
-                    <VotingOption name={option} key={option} />
+                    <VotingOption
+                        name={option}
+                        key={option}
+                        removable={true}
+                        removeOptionHandler={removeOptionHandler}
+                    />
                 ))}
                 <VotingOptionAdder addOptionHandler={addOptionHandler} />
             </div>

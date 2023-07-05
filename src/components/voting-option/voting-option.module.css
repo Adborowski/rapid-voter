@@ -34,13 +34,19 @@
 
 .votingOption button span {
     display: block;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 100;
     width: 100%;
     margin: auto;
     padding: 0;
     color: white;
 }
+
+.votingOption .btnRemoveOption {
+    background-color: rgb(230, 99, 99);
+    padding-bottom: 3.5px;
+}
+
 .votingOption input[type="text"] {
     margin-left: 6px;
 }
@@ -64,4 +70,5 @@
 .votingOptionAdder input[type="text"] {
     border-radius: 6px;
     font-size: 1rem;
+    font-family: "Helvetica";
 }

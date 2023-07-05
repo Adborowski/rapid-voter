@@ -6,19 +6,24 @@ import VotingOptionAdder from "../voting-option/voting-option-adder";
 const RoomEditor = (props: any) => {
     const [votingOptions, setVotingOptions] = useState<string[]>([]);
 
-    const addOptionHandler = (name: string) => {
-        console.log("adding option...", name);
-        setVotingOptions((options) => [...options, name]);
+    const addOptionHandler = (newOption: string) => {
+        if (!votingOptions.includes(newOption)) {
+            setVotingOptions((options) => [...options, newOption]);
+        } else {
+            console.error("ERROR: Option", name, "already exists.");
+        }
     };
 
-    const removeOptionHandler = () => {
-        console.log("removing option...");
+    const removeOptionHandler = (optionToRemove: string) => {
+        setVotingOptions((options) =>
+            options.filter((option) => option !== optionToRemove)
+        );
     };
 
     return (
         <div className={styles.roomEditor}>
             <div className={styles.votingOptions}>
-                {votingOptions.map((option) => (
+                {votingOptions.map((option, index) => (
                     <VotingOption
                         name={option}
                         key={option}

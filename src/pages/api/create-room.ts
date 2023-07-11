@@ -18,12 +18,14 @@ export default async function handler(
         client = await connectDatabase();
     } catch (e) {
         res.status(500).json({ message: "Could not connect to DB." });
+        return;
     }
 
     try {
         insertDoc(client, "voting-rooms", req.body);
     } catch (e) {
         res.status(500).json({ message: "Could not insert document." });
+        return;
     }
 
     res.status(200).json(req.body);

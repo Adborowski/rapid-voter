@@ -1,11 +1,13 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import styles from "./room-editor.module.css";
 import VotingOption from "../voting-option/voting-option";
 import VotingOptionAdder from "../voting-option/voting-option-adder";
+import RoomLink from "../room-link/room-link";
 import { v4 as uuidv4 } from "uuid";
 
 const RoomEditor = (props: any) => {
     const [votingOptions, setVotingOptions] = useState<string[]>([]);
+    const [roomId, setRoomId] = useState();
 
     const addOptionHandler = (newOption: string) => {
         if (!votingOptions.includes(newOption)) {
@@ -39,6 +41,7 @@ const RoomEditor = (props: any) => {
             .then((res) => res.json())
             .then((data) => {
                 console.log("Voting room created", data);
+                setRoomId(data.roomId);
             });
     };
 
@@ -65,6 +68,7 @@ const RoomEditor = (props: any) => {
                     Save
                 </button>
             </div>
+            {roomId && <RoomLink roomId={roomId} />}
         </div>
     );
 };

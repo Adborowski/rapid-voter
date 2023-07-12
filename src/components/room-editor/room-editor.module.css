@@ -21,16 +21,15 @@
     width: 100%;
     font-size: 1.2rem;
     background-color: transparent;
-    color: white;
     font-weight: 600;
+    color: white;
 }
 
 .roomNameInput input::placeholder {
-    color: #ffffff;
     font-size: 1.2rem;
+    color: white;
 }
 
 .votingOptions {
-    margin-top: 12px;
     margin-bottom: 12px;
 }

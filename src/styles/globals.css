@@ -19,7 +19,12 @@ h6 {
 }
 
 body {
-    background-color: #909499;
+    background: rgb(12, 19, 89);
+    background: linear-gradient(
+        180deg,
+        rgba(12, 19, 89, 1) 0%,
+        rgba(73, 36, 130, 1) 81%
+    );
     height: 100vh;
     display: flex;
     flex-direction: column;

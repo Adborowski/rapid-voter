@@ -9,7 +9,7 @@ const RoomEditor = (props: any) => {
     const [votingOptions, setVotingOptions] = useState<string[]>([]);
     const [roomId, setRoomId] = useState();
     const [isSaving, setIsSaving] = useState<Boolean>();
-    const roomNameRef = useRef<HTMLInputElement | null>(null);
+    const [roomName, setRoomName] = useState<String>();
 
     const addOptionHandler = (newOption: string) => {
         if (!votingOptions.includes(newOption)) {
@@ -27,13 +27,10 @@ const RoomEditor = (props: any) => {
 
     const createVotingRoom = (votingOptions: string[]) => {
         setIsSaving(true);
-        if (roomNameRef.current) {
-            console.log(roomNameRef.current.value);
-        }
 
         const newRoom = {
-            roomName: roomNameRef.current
-                ? roomNameRef.current.value
+            roomName: roomName
+                ? roomName
                 : `Voting Room ${Math.floor(Math.random() * 10000)}`,
             creationTime: Date.now(),
             roomId: uuidv4(),
@@ -59,7 +56,9 @@ const RoomEditor = (props: any) => {
         <div className={styles.roomEditor}>
             <div className={styles.roomNameInput}>
                 <input
-                    ref={roomNameRef}
+                    onChange={(e) => {
+                        setRoomName(e.target.value);
+                    }}
                     placeholder={"Enter your question"}
                 ></input>
             </div>

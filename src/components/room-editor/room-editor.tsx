@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styles from "./room-editor.module.css";
 import VotingOption from "../voting-option/voting-option";
 import VotingOptionAdder from "../voting-option/voting-option-adder";
@@ -8,6 +8,8 @@ import { v4 as uuidv4 } from "uuid";
 const RoomEditor = (props: any) => {
     const [votingOptions, setVotingOptions] = useState<string[]>([]);
     const [roomId, setRoomId] = useState();
+    const [isSaving, setIsSaving] = useState<Boolean>();
+    const roomNameRef = useRef<HTMLInputElement | null>(null);
 
     const addOptionHandler = (newOption: string) => {
         if (!votingOptions.includes(newOption)) {
@@ -24,8 +26,15 @@ const RoomEditor = (props: any) => {
     };
 
     const createVotingRoom = (votingOptions: string[]) => {
+        setIsSaving(true);
+        if (roomNameRef.current) {
+            console.log(roomNameRef.current.value);
+        }
+
         const newRoom = {
-            roomName: `Sample Room ${Math.floor(Math.random() * 10000)}`,
+            roomName: roomNameRef.current
+                ? roomNameRef.current.value
+                : `Voting Room ${Math.floor(Math.random() * 10000)}`,
             creationTime: Date.now(),
             roomId: uuidv4(),
             votingOptions: votingOptions,
@@ -40,13 +49,20 @@ const RoomEditor = (props: any) => {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log("Voting room created", data);
+                console.log("[create-room]", data);
                 setRoomId(data.roomId);
+                setIsSaving(false);
             });
     };
 
     return (
         <div className={styles.roomEditor}>
+            <div className={styles.roomNameInput}>
+                <input
+                    ref={roomNameRef}
+                    placeholder={"Enter your question"}
+                ></input>
+            </div>
             <div className={styles.votingOptions}>
                 {votingOptions.map((option, index) => (
                     <VotingOption
@@ -59,14 +75,17 @@ const RoomEditor = (props: any) => {
                 <VotingOptionAdder addOptionHandler={addOptionHandler} />
             </div>
             <div className={styles.controls}>
-                <button
-                    onClick={() => {
-                        createVotingRoom(votingOptions);
-                    }}
-                    className={styles.save}
-                >
-                    Save
-                </button>
+                {!roomId && (
+                    <button
+                        disabled={votingOptions.length < 2}
+                        onClick={() => {
+                            createVotingRoom(votingOptions);
+                        }}
+                        className={styles.save}
+                    >
+                        {isSaving ? "Saving..." : "Save"}
+                    </button>
+                )}
             </div>
             {roomId && <RoomLink roomId={roomId} />}
         </div>

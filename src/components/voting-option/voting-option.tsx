@@ -1,10 +1,11 @@
 import styles from "./voting-option.module.css";
 
-type VotingOptionProps = {
+interface VotingOptionProps {
     name: string;
     removable?: boolean;
     removeOptionHandler?: (name: string) => any;
-};
+    voteHandler?: (name: string) => any;
+}
 
 const VotingOption = (props: VotingOptionProps) => {
     const { name, removable, removeOptionHandler } = props;
@@ -20,11 +21,22 @@ const VotingOption = (props: VotingOptionProps) => {
             }}
         >
             {removable && (
-                <button type="button" className={styles.btnRemoveOption}>
+                <button
+                    tabIndex={-1}
+                    type="button"
+                    className={styles.btnRemoveOption}
+                >
                     <span>-</span>
                 </button>
             )}
-            {!removable && <input id={name} name="votingOption" type="radio" />}
+            {!removable && (
+                <input
+                    id={name}
+                    value={name}
+                    name="votingOption"
+                    type="radio"
+                />
+            )}
             <span>{name}</span>
         </label>
     );

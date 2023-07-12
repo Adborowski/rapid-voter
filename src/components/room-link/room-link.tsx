@@ -8,9 +8,9 @@ type RoomLinkProps = {
 const RoomLink = (props: RoomLinkProps) => {
     const { roomId } = props;
     return (
-        <div className={styles.RoomLink}>
-            <Link href={"/room/" + roomId}>Go to room</Link>
-        </div>
+        <button className={styles.RoomLink}>
+            <Link href={"/room/" + roomId}>See vote</Link>
+        </button>
     );
 };
 

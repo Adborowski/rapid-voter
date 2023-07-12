@@ -21,7 +21,7 @@ const VotingOptionAdder = (props: VotingOptionAdderProps) => {
             onSubmit={handleNewVotingOption}
             className={`${styles.votingOption} ${styles.votingOptionAdder}`}
         >
-            <button type="submit">
+            <button tabIndex={-1} type="submit">
                 <span>+</span>
             </button>
             <input
@@ -29,6 +29,7 @@ const VotingOptionAdder = (props: VotingOptionAdderProps) => {
                 placeholder={"New voting option"}
                 name="votingOption"
                 type="text"
+                tabIndex={0}
             />
         </form>
     );

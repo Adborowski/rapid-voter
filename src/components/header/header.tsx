@@ -1,9 +1,14 @@
 import styles from "./header.module.css";
+import Link from "next/link";
 
 const Header = () => {
     return (
         <header className={styles.header}>
-            <h1>rapid-voter</h1>
+            <nav>
+                <Link className={styles.link} href={"/"}>
+                    New Vote
+                </Link>
+            </nav>
         </header>
     );
 };

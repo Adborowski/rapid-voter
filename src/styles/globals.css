@@ -52,3 +52,7 @@ button:disabled {
 input:focus {
     outline: none;
 }
+
+input:focus::placeholder {
+    opacity: 0;
+}

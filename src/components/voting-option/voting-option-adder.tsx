@@ -26,7 +26,7 @@ const VotingOptionAdder = (props: VotingOptionAdderProps) => {
             </button>
             <input
                 ref={newOptionText}
-                placeholder={"New voting option"}
+                placeholder={"Enter new option"}
                 name="votingOption"
                 type="text"
                 tabIndex={0}

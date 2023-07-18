@@ -1,6 +1,6 @@
 import styles from "./room.module.css";
 import VotingOption from "../voting-option/voting-option";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect } from "react";
 
 type VotingRoomData = {
     votingRoomData: {
@@ -13,7 +13,19 @@ type VotingRoomData = {
 
 const Room = ({ votingRoomData }: VotingRoomData) => {
     const { roomId, roomName, votingOptions, creationTime } = votingRoomData;
+    const readableDate = new Date(creationTime).toLocaleString();
     const [selectedOption, setSelectedOption] = useState();
+    const [roomVotes, setRoomVotes] = useState<any[]>();
+
+    useEffect(() => {
+        if (roomVotes) {
+            const voteCounts = {};
+            console.log("roomVotes have changed", roomVotes);
+            console.log("votingOptions are", votingOptions);
+
+            roomVotes.forEach((vote) => {});
+        }
+    }, [roomVotes]);
 
     const handleChange = (e: any) => {
         setSelectedOption(e.target.value);
@@ -36,12 +48,12 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
             .then((res) => res.json())
             .then((data) => {
                 console.log("[submit-vote]", data);
-                getRoomResults(roomId);
+                getRoomVotes(roomId);
             });
     };
 
-    const getRoomResults = (roomId: string) => {
-        fetch("/api/get-room-results", {
+    const getRoomVotes = (roomId: string) => {
+        fetch("/api/get-room-votes", {
             method: "POST",
             body: JSON.stringify({
                 roomId: roomId,
@@ -53,10 +65,9 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
             .then((res) => res.json())
             .then((data) => {
                 console.log("[get-room-results]", data);
+                setRoomVotes(data.payload);
             });
     };
-
-    const readableDate = new Date(creationTime).toLocaleString();
 
     return (
         <section className={styles.room}>

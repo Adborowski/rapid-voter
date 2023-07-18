@@ -42,7 +42,7 @@ export async function submitVoteToRoom(
     return result;
 }
 
-export async function getResultsForRoom(client: any, roomId: string) {
+export async function getRoomVotes(client: any, roomId: string) {
     const db = client.db("rapid-voter");
     const votes = db.collection("votes");
 

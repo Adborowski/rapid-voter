@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { connectDatabase, getResultsForRoom } from "@/utils/db-util";
+import { connectDatabase, getRoomVotes } from "@/utils/db-util";
 
 type Data = {
     message: any;
@@ -22,10 +22,10 @@ export default async function handler(
 
     try {
         const { roomId } = req.body;
-        let roomVotes = await getResultsForRoom(client, roomId);
+        let roomVotes = await getRoomVotes(client, roomId);
         roomVotes = roomVotes.toArray().then((votes: {}) => {
             res.status(200).json({
-                message: "Found room results.",
+                message: "Found room votes.",
                 payload: votes,
             });
         });

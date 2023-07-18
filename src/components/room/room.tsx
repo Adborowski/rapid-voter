@@ -11,6 +11,10 @@ type VotingRoomData = {
     };
 };
 
+interface VoteCount {
+    [key: string]: number;
+}
+
 const Room = ({ votingRoomData }: VotingRoomData) => {
     const { roomId, roomName, votingOptions, creationTime } = votingRoomData;
     const readableDate = new Date(creationTime).toLocaleString();
@@ -19,11 +23,18 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
 
     useEffect(() => {
         if (roomVotes) {
-            const voteCounts = {};
-            console.log("roomVotes have changed", roomVotes);
-            console.log("votingOptions are", votingOptions);
+            // create the voteCounts option which holds votingOptions as keys and numbers as values
+            const voteCounts = {} as VoteCount;
+            for (let option of votingOptions) {
+                voteCounts[option as keyof typeof voteCounts] = 0;
+            }
 
-            roomVotes.forEach((vote) => {});
+            // count the votes
+            roomVotes.forEach((vote) => {
+                voteCounts[vote.selectedOption]++;
+            });
+
+            console.log("voteCounts", voteCounts);
         }
     }, [roomVotes]);
 

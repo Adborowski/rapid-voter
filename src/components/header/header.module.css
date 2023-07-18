@@ -2,7 +2,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: white;
+    padding: 6px;
 }
 
 .header h1 {
@@ -13,4 +13,11 @@
 .header .link {
     padding: 12px;
     display: block;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+}
+
+.header .link:hover {
+    background-color: rgba(255, 255, 255, 0.35);
 }

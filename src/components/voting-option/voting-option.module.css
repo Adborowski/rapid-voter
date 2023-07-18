@@ -5,12 +5,17 @@
     padding: 6px;
     transition: 0.125s all ease;
     border-radius: 6px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.2);
     color: white;
 }
 
 .votingOption.removable {
     margin-bottom: 6px;
+}
+
+.votingOption:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
 }
 
 .votingOption.removable:hover {

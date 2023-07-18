@@ -25,3 +25,27 @@ export async function findDoc(client: any, collectionName: string, query: {}) {
     console.log("findDoc result", document);
     return document;
 }
+
+export async function submitVoteToRoom(
+    client: any,
+    roomId: string,
+    selectedOption: string
+) {
+    const db = client.db("rapid-voter");
+    const votes = db.collection("votes");
+
+    const result = await votes.insertOne({
+        roomId: roomId,
+        selectedOption: selectedOption,
+    });
+
+    return result;
+}
+
+export async function getResultsForRoom(client: any, roomId: string) {
+    const db = client.db("rapid-voter");
+    const votes = db.collection("votes");
+
+    const result = await votes.find({ roomId: roomId });
+    return result;
+}

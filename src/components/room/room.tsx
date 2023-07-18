@@ -22,6 +22,38 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
     const submitVote = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log("Submitting vote for", selectedOption);
+
+        fetch("/api/submit-vote", {
+            method: "POST",
+            body: JSON.stringify({
+                roomId: roomId,
+                selectedOption: selectedOption,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("[submit-vote]", data);
+                getRoomResults(roomId);
+            });
+    };
+
+    const getRoomResults = (roomId: string) => {
+        fetch("/api/get-room-results", {
+            method: "POST",
+            body: JSON.stringify({
+                roomId: roomId,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("[get-room-results]", data);
+            });
     };
 
     const readableDate = new Date(creationTime).toLocaleString();

@@ -48,6 +48,7 @@ button {
     font-size: 1rem;
     display: block;
     width: 100%;
+    cursor: pointer;
 }
 
 button:disabled {

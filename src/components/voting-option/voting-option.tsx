@@ -4,19 +4,41 @@ interface VoteCount {
     [key: string]: number;
 }
 
+// it's a string for purposes of CSS and display
+interface VotePercentage {
+    [key: string]: string;
+}
+
 interface VotingOptionProps {
     name: string;
     removable?: boolean;
     removeOptionHandler?: (name: string) => any;
     voteHandler?: (name: string) => any;
-    results?: VoteCount;
+    voteCounts?: VoteCount;
 }
 
 const VotingOption = (props: VotingOptionProps) => {
-    const { name, removable, removeOptionHandler, results } = props;
+    const { name, removable, removeOptionHandler, voteCounts } = props;
 
-    if (results && results[name]) {
-        console.log(name, "got", results[name], "votes");
+    // sum the votecount and arrive at one number
+    // used to determine % of vote
+    const sumVotes = (voteCounts: VoteCount) => {
+        return Object.values(voteCounts).reduce((a, b) => a + b, 0);
+    };
+
+    const getVotePercentages = (voteCounts: VoteCount) => {
+        const totalVotes = sumVotes(voteCounts); // how many votes casted in total in this room
+        let votePercentages: VotePercentage = {};
+        Object.keys(voteCounts).forEach((key) => {
+            votePercentages[key] =
+                ((voteCounts[key] / totalVotes) * 100).toFixed(0).toString() +
+                "%";
+        });
+        return votePercentages;
+    };
+
+    if (voteCounts && voteCounts[name]) {
+        getVotePercentages(voteCounts);
     } else {
         console.log("Nope");
     }
@@ -50,8 +72,17 @@ const VotingOption = (props: VotingOptionProps) => {
             )}
             <div className={styles.optionInfo}>
                 <span>{name}</span>
-                {results && results[name] && <span>{results[name]}</span>}
+                {voteCounts && voteCounts[name] && (
+                    <span>{voteCounts[name]}</span>
+                )}
             </div>
+
+            {voteCounts && voteCounts[name] && (
+                <div
+                    style={{ maxWidth: getVotePercentages(voteCounts)[name] }}
+                    className={styles.percentageBar}
+                ></div>
+            )}
         </label>
     );
 };

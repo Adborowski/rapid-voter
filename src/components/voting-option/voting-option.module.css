@@ -7,6 +7,7 @@
     border-radius: 6px;
     background-color: rgba(255, 255, 255, 0.2);
     color: white;
+    position: relative;
 }
 
 .votingOption.removable {
@@ -73,6 +74,19 @@
 .votingOption .optionInfo {
     display: flex;
     justify-content: space-between;
+}
+
+.votingOption .percentageBar {
+    background-color: white;
+    opacity: 0.2;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    /* max-width will get changed to % of vote when the voteCounts arrive in .votingOption */
+    max-width: 0%;
+    transition: 0.3s all ease;
 }
 
 .votingOption input:not(:focus)::placeholder {

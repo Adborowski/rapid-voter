@@ -105,7 +105,7 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
                 {votingOptions.map((option) => {
                     return (
                         <VotingOption
-                            results={voteCounts}
+                            voteCounts={voteCounts}
                             key={option}
                             name={option}
                         />

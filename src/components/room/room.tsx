@@ -11,6 +11,12 @@ type VotingRoomData = {
     };
 };
 
+interface RoomVote {
+    _id: string;
+    roomId: string;
+    selectedOption: string;
+}
+
 interface VoteCount {
     [key: string]: number;
 }
@@ -19,24 +25,32 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
     const { roomId, roomName, votingOptions, creationTime } = votingRoomData;
     const readableDate = new Date(creationTime).toLocaleString();
     const [selectedOption, setSelectedOption] = useState();
-    const [roomVotes, setRoomVotes] = useState<any[]>();
+    const [roomVotes, setRoomVotes] = useState<any[]>(); // all raw votes for the room
+    const [voteCounts, setVoteCounts] = useState<VoteCount>(); // neatly counted votes, an obj of {option: count} items
 
     useEffect(() => {
         if (roomVotes) {
-            // create the voteCounts option which holds votingOptions as keys and numbers as values
-            const voteCounts = {} as VoteCount;
-            for (let option of votingOptions) {
-                voteCounts[option as keyof typeof voteCounts] = 0;
+            const voteCounts = countVotes(roomVotes);
+            if (voteCounts) {
+                setVoteCounts(voteCounts);
             }
-
-            // count the votes
-            roomVotes.forEach((vote) => {
-                voteCounts[vote.selectedOption]++;
-            });
-
-            console.log("voteCounts", voteCounts);
         }
     }, [roomVotes]);
+
+    const countVotes = (roomVotes: RoomVote[]) => {
+        // create the voteCounts option which holds votingOptions as keys and numbers as values
+        const voteCounts = {} as VoteCount;
+        for (let option of votingOptions) {
+            voteCounts[option as keyof typeof voteCounts] = 0;
+        }
+
+        // count the votes
+        roomVotes.forEach((vote) => {
+            voteCounts[vote.selectedOption]++;
+        });
+
+        return voteCounts;
+    };
 
     const handleChange = (e: any) => {
         setSelectedOption(e.target.value);
@@ -89,7 +103,13 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
 
             <form onChange={handleChange} onSubmit={submitVote}>
                 {votingOptions.map((option) => {
-                    return <VotingOption key={option} name={option} />;
+                    return (
+                        <VotingOption
+                            results={voteCounts}
+                            key={option}
+                            name={option}
+                        />
+                    );
                 })}
 
                 <div className={styles.controls}>

@@ -89,6 +89,12 @@
     transition: 0.3s all ease;
 }
 
+.votingOption .voteStats {
+    /* border: 1px solid lime; */
+    margin-right: -40%;
+    display: flex;
+}
+
 .votingOption input:not(:focus)::placeholder {
     opacity: 1;
     font-size: 1rem;

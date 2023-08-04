@@ -20,6 +20,8 @@ interface VotingOptionProps {
 const VotingOption = (props: VotingOptionProps) => {
     const { name, removable, removeOptionHandler, voteCounts } = props;
 
+    console.log("voteCounts", voteCounts);
+
     // sum the votecount and arrive at one number
     // used to determine % of vote
     const sumVotes = (voteCounts: VoteCount) => {
@@ -34,13 +36,14 @@ const VotingOption = (props: VotingOptionProps) => {
                 ((voteCounts[key] / totalVotes) * 100).toFixed(0).toString() +
                 "%";
         });
+        console.log(votePercentages);
         return votePercentages;
     };
 
     if (voteCounts && voteCounts[name]) {
         getVotePercentages(voteCounts);
     } else {
-        console.log("Nope");
+        console.log("No voteCounts.");
     }
 
     return (
@@ -72,17 +75,22 @@ const VotingOption = (props: VotingOptionProps) => {
             )}
             <div className={styles.optionInfo}>
                 <span>{name}</span>
-                {voteCounts && voteCounts[name] && (
-                    <span>{voteCounts[name]}</span>
+                {voteCounts && voteCounts[name] > 0 && (
+                    <div className={styles.voteStats}>
+                        <span>{voteCounts[name]}</span>
+                        <span>{getVotePercentages(voteCounts)[name]}</span>
+                    </div>
                 )}
             </div>
 
-            {voteCounts && voteCounts[name] && (
-                <div
-                    style={{ maxWidth: getVotePercentages(voteCounts)[name] }}
-                    className={styles.percentageBar}
-                ></div>
-            )}
+            <div
+                style={{
+                    maxWidth: voteCounts
+                        ? getVotePercentages(voteCounts)[name]
+                        : "0%",
+                }}
+                className={styles.percentageBar}
+            ></div>
         </label>
     );
 };

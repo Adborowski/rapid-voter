@@ -15,10 +15,17 @@ interface VotingOptionProps {
     removeOptionHandler?: (name: string) => any;
     voteHandler?: (name: string) => any;
     voteCounts?: VoteCount;
+    userAlreadyVoted: Boolean;
 }
 
 const VotingOption = (props: VotingOptionProps) => {
-    const { name, removable, removeOptionHandler, voteCounts } = props;
+    const {
+        name,
+        removable,
+        removeOptionHandler,
+        voteCounts,
+        userAlreadyVoted,
+    } = props;
 
     console.log("voteCounts", voteCounts);
 
@@ -71,6 +78,7 @@ const VotingOption = (props: VotingOptionProps) => {
                     value={name}
                     name="votingOption"
                     type="radio"
+                    disabled={userAlreadyVoted}
                 />
             )}
             <div className={styles.optionInfo}>

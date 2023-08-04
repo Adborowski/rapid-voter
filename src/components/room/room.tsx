@@ -27,6 +27,7 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
     const [selectedOption, setSelectedOption] = useState();
     const [roomVotes, setRoomVotes] = useState<any[]>(); // all raw votes for the room
     const [voteCounts, setVoteCounts] = useState<VoteCount>(); // neatly counted votes, an obj of {option: count} items
+    const [userAlreadyVoted, setUserAlreadyVoted] = useState<Boolean>(false);
 
     useEffect(() => {
         if (roomVotes) {
@@ -37,8 +38,16 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
         }
     }, [roomVotes]);
 
+    useEffect(() => {
+        console.log("User voted already?", localStorage.getItem(roomId));
+        if (localStorage.getItem(roomId)) {
+            setUserAlreadyVoted(true);
+            getRoomVotes(roomId);
+        }
+    }, []);
+
     const countVotes = (roomVotes: RoomVote[]) => {
-        // create the voteCounts option which holds votingOptions as keys and numbers as values
+        // create the voteCounts object which holds votingOption strings as keys and numbers as values
         const voteCounts = {} as VoteCount;
         for (let option of votingOptions) {
             voteCounts[option as keyof typeof voteCounts] = 0;
@@ -74,6 +83,10 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
             .then((data) => {
                 console.log("[submit-vote]", data);
                 getRoomVotes(roomId);
+
+                if (data.acknowledged) {
+                    localStorage.setItem(roomId, "1");
+                }
             });
     };
 
@@ -108,14 +121,18 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
                             voteCounts={voteCounts}
                             key={option}
                             name={option}
+                            userAlreadyVoted={userAlreadyVoted}
                         />
                     );
                 })}
 
                 <div className={styles.controls}>
                     <button disabled={!selectedOption}>
-                        {!selectedOption && "Select an option"}
+                        {!selectedOption &&
+                            !userAlreadyVoted &&
+                            "Select an option"}
                         {selectedOption && "Vote for " + selectedOption}
+                        {userAlreadyVoted && "You have already voted."}
                     </button>
                 </div>
             </form>

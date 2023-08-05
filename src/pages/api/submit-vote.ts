@@ -1,10 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import {
-    connectDatabase,
-    insertDoc,
-    findDoc,
-    submitVoteToRoom,
-} from "@/utils/db-util";
+import clientPromise from "@/utils/mongodb";
+import { submitVoteToRoom } from "@/utils/db-util";
 
 type Data = {
     message: any;
@@ -20,7 +16,7 @@ export default async function handler(
     console.log(req.body);
 
     try {
-        client = await connectDatabase();
+        client = await clientPromise;
         const { roomId, selectedOption } = req.body;
         const result = await submitVoteToRoom(client, roomId, selectedOption);
         res.status(200).json(result);

@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import { connectDatabase, insertDoc, findDoc } from "@/utils/db-util";
+import clientPromise from "@/utils/mongodb";
 
 type Data = {
     message: any;
@@ -16,7 +17,7 @@ export default async function handler(
     console.log("[api/find-room]");
 
     try {
-        client = await connectDatabase();
+        client = await clientPromise;
     } catch (e) {
         res.status(500).json({ message: "Could not connect to DB." });
     }

@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { connectDatabase, insertDoc, findDoc } from "@/utils/db-util";
+import { findDoc } from "@/utils/db-util";
 import clientPromise from "@/utils/mongodb";
 
 type Data = {

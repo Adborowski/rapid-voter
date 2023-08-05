@@ -27,8 +27,6 @@ const VotingOption = (props: VotingOptionProps) => {
         userAlreadyVoted,
     } = props;
 
-    console.log("voteCounts", voteCounts);
-
     // sum the votecount and arrive at one number
     // used to determine % of vote
     const sumVotes = (voteCounts: VoteCount) => {
@@ -43,14 +41,11 @@ const VotingOption = (props: VotingOptionProps) => {
                 ((voteCounts[key] / totalVotes) * 100).toFixed(0).toString() +
                 "%";
         });
-        console.log(votePercentages);
         return votePercentages;
     };
 
     if (voteCounts && voteCounts[name]) {
         getVotePercentages(voteCounts);
-    } else {
-        console.log("No voteCounts.");
     }
 
     return (

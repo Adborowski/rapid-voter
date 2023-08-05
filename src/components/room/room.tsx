@@ -62,6 +62,7 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
     };
 
     const handleChange = (e: any) => {
+        console.log("handleChange");
         setSelectedOption(e.target.value);
     };
 
@@ -83,6 +84,7 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
             .then((data) => {
                 console.log("[submit-vote]", data);
                 getRoomVotes(roomId);
+                setUserAlreadyVoted(true);
 
                 if (data.acknowledged) {
                     localStorage.setItem(roomId, "1");
@@ -127,13 +129,20 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
                 })}
 
                 <div className={styles.controls}>
-                    <button disabled={!selectedOption}>
-                        {!selectedOption &&
-                            !userAlreadyVoted &&
-                            "Select an option"}
-                        {selectedOption && "Vote for " + selectedOption}
-                        {userAlreadyVoted && "You have already voted."}
-                    </button>
+                    {!userAlreadyVoted && (
+                        <button disabled={!selectedOption}>
+                            {!selectedOption &&
+                                !userAlreadyVoted &&
+                                "Select an option"}
+                            {selectedOption && "Vote for " + selectedOption}
+                        </button>
+                    )}
+
+                    {userAlreadyVoted && (
+                        <div className={styles.infoUserAlreadyVoted}>
+                            <span>You have already voted.</span>
+                        </div>
+                    )}
                 </div>
             </form>
         </section>

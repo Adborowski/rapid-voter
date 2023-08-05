@@ -47,6 +47,39 @@
     padding: 0;
 }
 
+.votingOption input[type="radio"] {
+    appearance: none;
+    position: relative;
+    background-color: white;
+}
+
+.votingOption input[type="radio"]:checked {
+    /* border: 2px solid lightgreen; */
+
+    background-image: url("/tick1.svg");
+    background-size: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+.votingOption input[type="radio"]:checked::before {
+    content: " ";
+    border-radius: 60px;
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(128, 255, 139);
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 1) 40%,
+        rgba(128, 255, 139, 1) 80%
+    );
+}
+
 .votingOption span {
     margin-left: 6px;
     padding: 6px;

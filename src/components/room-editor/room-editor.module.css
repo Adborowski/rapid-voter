@@ -1,35 +1,43 @@
 .roomEditor {
-    max-width: 300px;
-    margin: auto;
-    padding: 12px;
-    border-radius: 6px;
+   max-width: 300px;
+   margin: auto;
+   padding: 12px;
+   border-radius: 6px;
 }
 
 .controls {
-    /* border: 1px solid red; */
+   /* border: 1px solid red; */
 }
 
 .roomEditor label {
-    color: white;
+   color: white;
 }
 
-.roomNameInput input {
-    text-align: center;
-    padding: 12px;
-    border-radius: 6px;
-    border: 0;
-    width: 100%;
-    font-size: 1.2rem;
-    background-color: transparent;
-    font-weight: 600;
-    color: white;
+.roomNameInput textarea {
+   text-align: center;
+   padding: 12px;
+   border-radius: 6px;
+   border: 0;
+   width: 100%;
+   font-size: 1.2rem;
+   background-color: transparent;
+   font-weight: 600;
+   color: white;
+   height: 42px;
+   resize: none;
+}
+
+.roomNameInput textarea:active,
+.roomNameInput textarea:focus {
+   /* outline: 0; */
+   /* border: 0; */
 }
 
 .roomNameInput input::placeholder {
-    font-size: 1.2rem;
-    color: white;
+   font-size: 1.2rem;
+   color: white;
 }
 
 .votingOptions {
-    margin-bottom: 12px;
+   margin-bottom: 12px;
 }

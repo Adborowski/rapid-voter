@@ -23,17 +23,21 @@
    background-color: transparent;
    font-weight: 600;
    color: white;
-   height: 42px;
+   height: 44px;
    resize: none;
+}
+
+.roomNameInput textarea::-webkit-scrollbar {
+   display: none;
 }
 
 .roomNameInput textarea:active,
 .roomNameInput textarea:focus {
-   /* outline: 0; */
-   /* border: 0; */
+   outline: 0;
+   border: 0;
 }
 
-.roomNameInput input::placeholder {
+.roomNameInput textarea::placeholder {
    font-size: 1.2rem;
    color: white;
 }

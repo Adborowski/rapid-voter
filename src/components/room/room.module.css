@@ -1,47 +1,51 @@
 .room {
-    max-width: 320px;
-    margin: auto;
-    padding: 12px 24px 24px 24px;
-    border-radius: 12px;
+   max-width: 320px;
+   margin: auto;
+   padding: 12px 24px 24px 24px;
+   border-radius: 12px;
 }
 
 .room header {
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 18px;
+   font-weight: 700;
+   text-align: center;
+   margin-bottom: 18px;
 }
 
 .room header h1 {
-    font-size: 1.2rem;
-    color: white;
+   font-size: 1.2rem;
+   color: white;
 }
 
 .room header time {
-    color: white;
-    margin-top: 3px;
-    display: block;
-    font-size: 0.8rem;
+   color: white;
+   margin-top: 3px;
+   display: block;
+   font-size: 0.8rem;
 }
 
 .room form {
-    position: relative;
-    margin: auto;
-    display: grid;
-    grid-gap: 6px;
+   position: relative;
+   margin: auto;
+   display: grid;
+   grid-gap: 6px;
 }
 
 .room form button {
-    width: 100%;
-    margin: auto;
-    display: block;
-    margin-top: 12px;
-    background-color: lightgreen;
-    border-radius: 6px;
-    padding: 11px;
+   width: 100%;
+   margin: auto;
+   display: block;
+   margin-top: 12px;
+   background-color: lightgreen;
+   border-radius: 6px;
+   padding: 11px;
 }
 
 .infoUserAlreadyVoted {
-    text-align: center;
-    margin-top: 12px;
-    color: white;
+   text-align: center;
+   margin-top: 12px;
+   color: white;
+}
+
+.resetButton {
+   background-color: yellow !important;
 }

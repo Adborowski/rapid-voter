@@ -139,6 +139,14 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
                {userAlreadyVoted && (
                   <div className={styles.infoUserAlreadyVoted}>
                      <span>Thank you for your vote.</span>
+                     <button
+                        className={styles.resetButton}
+                        onClick={() => {
+                           setUserAlreadyVoted(false)
+                        }}
+                     >
+                        Reset
+                     </button>
                   </div>
                )}
             </div>

@@ -126,11 +126,12 @@
    flex-direction: column;
    justify-content: center;
    margin-left: 12px;
+   max-width: 95%;
 }
 
 .votingOption .optionInfo .optionNameWrapper span {
    /* border: 1px solid lime; */
-   height: 1em;
+   /* height: 1em; */
    display: block;
 }
 
@@ -194,4 +195,11 @@
 
 .votingOptionAdder input[type='text']::placeholder {
    color: white;
+}
+
+.buttonPlus {
+   background-image: url('/plus1.svg');
+   background-position: center;
+   background-size: 12px;
+   background-repeat: no-repeat;
 }

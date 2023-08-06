@@ -80,7 +80,7 @@
    width: 100%;
    height: 100%;
    background: rgb(128, 255, 139);
-   background: radial-gradient(circle, rgba(255, 255, 255, 1) 40%, rgba(128, 255, 139, 1) 80%);
+   background: radial-gradient(circle, rgba(255, 255, 255, 1) 5%, rgba(128, 255, 139, 0.5) 80%);
    mix-blend-mode: darken;
    animation: fadeIn 1s ease forwards;
 }
@@ -200,7 +200,13 @@
 }
 
 .votingOptionAdder input[type='text']::placeholder {
+   transition: 0.3s ease all;
+   opacity: 1;
    color: white;
+}
+
+.votingOptionAdder input[type='text']:focus::placeholder {
+   opacity: 0;
 }
 
 .buttonPlus {

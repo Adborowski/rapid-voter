@@ -1,0 +1,30 @@
+.settingWrapper {
+   /* border: 1px solid lime; */
+   padding: 12px;
+}
+.settingWrapper header span {
+   color: white;
+   font-size: 1.2rem;
+   font-weight: 600;
+}
+
+.settingWrapper .nameWrapper {
+   border: 1px solid red;
+   display: inline-flex;
+   height: 24px;
+}
+
+.settingWrapper input[type='checkbox'] {
+   /* height: 100%; */
+   border: 5px solid red;
+   background-color: red;
+   display: inline;
+   height: 20px;
+   width: 20px;
+   margin-left: 12px;
+}
+
+.settingWrapper article {
+   color: white;
+   margin-top: 12px;
+}

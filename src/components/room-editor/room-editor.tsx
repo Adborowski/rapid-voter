@@ -4,10 +4,11 @@ import VotingOption from '../voting-option/voting-option'
 import VotingOptionAdder from '../voting-option/voting-option-adder'
 import RoomLink from '../room-link/room-link'
 import { v4 as uuidv4 } from 'uuid'
+import RoomSettings from '../room-settings/room-settings'
 
 const RoomEditor = (props: any) => {
    const [votingOptions, setVotingOptions] = useState<string[]>([])
-   const [roomId, setRoomId] = useState()
+   const [roomId, setRoomId] = useState() // roomId gets set once a room has been created (it's in the api response)
    const [isSaving, setIsSaving] = useState<Boolean>()
    const [roomName, setRoomName] = useState<String>()
 
@@ -86,6 +87,7 @@ const RoomEditor = (props: any) => {
                </button>
             )}
          </div>
+         {!roomId && <RoomSettings />}
          {roomId && <RoomLink roomId={roomId} />}
       </div>
    )

@@ -37,7 +37,14 @@
    border: 0;
 }
 
+.roomNameInput textarea:active::placeholder,
+.roomNameInput textarea:focus::placeholder {
+   opacity: 0;
+}
+
 .roomNameInput textarea::placeholder {
+   opacity: 1;
+   transition: 0.3s ease all;
    font-size: 1.2rem;
    color: white;
 }

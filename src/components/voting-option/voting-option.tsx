@@ -49,9 +49,7 @@ const VotingOption = (props: VotingOptionProps) => {
          }}
       >
          {removable && (
-            <button tabIndex={-1} type="button" className={styles.btnRemoveOption}>
-               <span>-</span>
-            </button>
+            <button tabIndex={-1} type="button" className={styles.btnRemoveOption}></button>
          )}
          {!removable && (
             <input
@@ -72,7 +70,7 @@ const VotingOption = (props: VotingOptionProps) => {
                   <div className={styles.voteStatWrapper}>
                      <span>{voteCounts[name]}</span>
                   </div>
-                  <div className={styles.voteStatWrapper}>
+                  <div className={`${styles.voteStatWrapper} ${styles.votePercentage}`}>
                      <span>{getVotePercentages(voteCounts)[name]}</span>
                   </div>
                </div>

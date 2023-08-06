@@ -138,7 +138,7 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
 
                {userAlreadyVoted && (
                   <div className={styles.infoUserAlreadyVoted}>
-                     <span>Thank you for your vote.</span>
+                     <span>You have voted.</span>
                      <button
                         className={styles.resetButton}
                         onClick={() => {

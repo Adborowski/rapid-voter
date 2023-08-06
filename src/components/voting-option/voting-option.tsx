@@ -1,101 +1,92 @@
-import styles from "./voting-option.module.css";
+import styles from './voting-option.module.css'
 
 interface VoteCount {
-    [key: string]: number;
+   [key: string]: number
 }
 
 // it's a string for purposes of CSS and display
 interface VotePercentage {
-    [key: string]: string;
+   [key: string]: string
 }
 
 interface VotingOptionProps {
-    name: string;
-    removable?: boolean;
-    removeOptionHandler?: (name: string) => any;
-    voteHandler?: (name: string) => any;
-    voteCounts?: VoteCount;
-    userAlreadyVoted: boolean;
+   name: string
+   removable?: boolean
+   removeOptionHandler?: (name: string) => any
+   voteHandler?: (name: string) => any
+   voteCounts?: VoteCount
+   userAlreadyVoted: boolean
 }
 
 const VotingOption = (props: VotingOptionProps) => {
-    const {
-        name,
-        removable,
-        removeOptionHandler,
-        voteCounts,
-        userAlreadyVoted,
-    } = props;
+   const { name, removable, removeOptionHandler, voteCounts, userAlreadyVoted } = props
 
-    // sum the votecount and arrive at one number
-    // used to determine % of vote
-    const sumVotes = (voteCounts: VoteCount) => {
-        return Object.values(voteCounts).reduce((a, b) => a + b, 0);
-    };
+   // sum the votecount and arrive at one number
+   // used to determine % of vote
+   const sumVotes = (voteCounts: VoteCount) => {
+      return Object.values(voteCounts).reduce((a, b) => a + b, 0)
+   }
 
-    const getVotePercentages = (voteCounts: VoteCount) => {
-        const totalVotes = sumVotes(voteCounts); // how many votes casted in total in this room
-        let votePercentages: VotePercentage = {};
-        Object.keys(voteCounts).forEach((key) => {
-            votePercentages[key] =
-                ((voteCounts[key] / totalVotes) * 100).toFixed(0).toString() +
-                "%";
-        });
-        return votePercentages;
-    };
+   const getVotePercentages = (voteCounts: VoteCount) => {
+      const totalVotes = sumVotes(voteCounts) // how many votes casted in total in this room
+      let votePercentages: VotePercentage = {}
+      Object.keys(voteCounts).forEach((key) => {
+         votePercentages[key] = ((voteCounts[key] / totalVotes) * 100).toFixed(0).toString() + '%'
+      })
+      return votePercentages
+   }
 
-    if (voteCounts && voteCounts[name]) {
-        getVotePercentages(voteCounts);
-    }
+   if (voteCounts && voteCounts[name]) {
+      getVotePercentages(voteCounts)
+   }
 
-    return (
-        <label
-            htmlFor={name}
-            className={`${styles.votingOption} ${
-                removable ? styles.removable : ""
-            }`}
-            onClick={() => {
-                removeOptionHandler ? removeOptionHandler(name) : "";
-            }}
-        >
-            {removable && (
-                <button
-                    tabIndex={-1}
-                    type="button"
-                    className={styles.btnRemoveOption}
-                >
-                    <span>-</span>
-                </button>
-            )}
-            {!removable && (
-                <input
-                    id={name}
-                    value={name}
-                    name="votingOption"
-                    type="radio"
-                    disabled={userAlreadyVoted}
-                />
-            )}
-            <div className={styles.optionInfo}>
-                <span>{name}</span>
-                {voteCounts && voteCounts[name] > 0 && (
-                    <div className={styles.voteStats}>
-                        <span>{voteCounts[name]}</span>
-                        <span>{getVotePercentages(voteCounts)[name]}</span>
-                    </div>
-                )}
+   return (
+      <label
+         htmlFor={name}
+         className={`${styles.votingOption} ${removable ? styles.removable : ''}`}
+         onClick={() => {
+            removeOptionHandler ? removeOptionHandler(name) : ''
+         }}
+      >
+         {removable && (
+            <button tabIndex={-1} type="button" className={styles.btnRemoveOption}>
+               <span>-</span>
+            </button>
+         )}
+         {!removable && (
+            <input
+               id={name}
+               value={name}
+               name="votingOption"
+               type="radio"
+               disabled={userAlreadyVoted}
+            />
+         )}
+         <div className={styles.optionInfo}>
+            <div className={styles.optionNameWrapper}>
+               <span>{name}</span>
             </div>
 
-            <div
-                style={{
-                    maxWidth: voteCounts
-                        ? getVotePercentages(voteCounts)[name]
-                        : "0%",
-                }}
-                className={styles.percentageBar}
-            ></div>
-        </label>
-    );
-};
+            {voteCounts && voteCounts[name] > 0 && (
+               <div className={styles.voteStats}>
+                  <div className={styles.voteStatWrapper}>
+                     <span>{voteCounts[name]}</span>
+                  </div>
+                  <div className={styles.voteStatWrapper}>
+                     <span>{getVotePercentages(voteCounts)[name]}</span>
+                  </div>
+               </div>
+            )}
+         </div>
 
-export default VotingOption;
+         <div
+            style={{
+               maxWidth: voteCounts ? getVotePercentages(voteCounts)[name] : '0%',
+            }}
+            className={styles.percentageBar}
+         ></div>
+      </label>
+   )
+}
+
+export default VotingOption

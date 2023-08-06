@@ -1,177 +1,197 @@
 .votingOption {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 30px 1fr;
-    padding: 6px;
-    transition: 0.125s all ease;
-    border-radius: 6px;
-    background-color: rgba(255, 255, 255, 0.2);
-    color: white;
-    position: relative;
+   width: 100%;
+   display: grid;
+   grid-template-columns: 30px 1fr;
+   padding: 6px;
+   transition: 0.125s all ease;
+   border-radius: 6px;
+   background-color: rgba(255, 255, 255, 0.2);
+   color: white;
+   position: relative;
 }
 
 .votingOption.removable {
-    margin-bottom: 6px;
+   margin-bottom: 6px;
 }
 
 .votingOption:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-    cursor: pointer;
+   background-color: rgba(255, 255, 255, 0.3);
+   cursor: pointer;
 }
 
 .votingOption.removable:hover {
-    background-color: rgba(255, 0, 0, 0.5);
-    cursor: pointer;
+   background-color: rgba(255, 0, 0, 0.5);
+   cursor: pointer;
 }
 
 .votingOption input {
-    padding: 6px;
-    display: block;
-    outline: none;
-    border: none;
+   padding: 6px;
+   display: block;
+   outline: none;
+   border: none;
 }
 
-.votingOption input[type="radio"],
+.votingOption input[type='radio'],
 .votingOption button {
-    width: 30px;
-    height: 30px;
-    border-radius: 60px;
+   width: 30px;
+   height: 30px;
+   border-radius: 60px;
 }
 
 .votingOption button {
-    background-color: rgb(76, 168, 76);
-    font-weight: 600;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding: 0;
+   background-color: rgb(76, 168, 76);
+   font-weight: 600;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   padding: 0;
 }
 
-.votingOption input[type="radio"] {
-    position: relative;
-    z-index: 5;
-    appearance: none;
-    position: relative;
-    background-color: white;
+.votingOption input[type='radio'] {
+   position: relative;
+   z-index: 5;
+   appearance: none;
+   position: relative;
+   background-color: white;
 }
 
-.votingOption input[type="radio"]:checked::after {
-    content: " ";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 60px;
-    /* border: 2px solid lightgreen; */
-    /* border: 3px solid red; */
-    background-image: url("/tick1.svg");
-    background-size: 30px;
-    background-position: center;
-    background-repeat: no-repeat;
-    animation: fadeIn 0.5s ease forwards;
+.votingOption input[type='radio']:checked::after {
+   content: ' ';
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   border-radius: 60px;
+   /* border: 2px solid lightgreen; */
+   /* border: 3px solid red; */
+   background-image: url('/tick1.svg');
+   background-size: 30px;
+   background-position: center;
+   background-repeat: no-repeat;
+   animation: fadeIn 0.5s ease forwards;
 }
 
-.votingOption input[type="radio"]:checked::before {
-    content: " ";
-    border-radius: 60px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgb(128, 255, 139);
-    background: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 1) 40%,
-        rgba(128, 255, 139, 1) 80%
-    );
-    mix-blend-mode: darken;
-    animation: fadeIn 1s ease forwards;
+.votingOption input[type='radio']:checked::before {
+   content: ' ';
+   border-radius: 60px;
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: rgb(128, 255, 139);
+   background: radial-gradient(circle, rgba(255, 255, 255, 1) 40%, rgba(128, 255, 139, 1) 80%);
+   mix-blend-mode: darken;
+   animation: fadeIn 1s ease forwards;
 }
 
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
+   0% {
+      opacity: 0;
+   }
 
-    100% {
-        opacity: 1;
-    }
-}
-
-.votingOption span {
-    margin-left: 6px;
-    padding: 6px;
+   100% {
+      opacity: 1;
+   }
 }
 
 .votingOption button span {
-    display: block;
-    font-size: 1.5rem;
-    font-weight: 100;
-    width: 100%;
-    margin: auto;
-    padding: 0;
-    color: white;
+   display: block;
+   font-size: 1.5rem;
+   font-weight: 100;
+   width: 100%;
+   margin: auto;
+   padding: 0;
+   color: white;
 }
 
 .votingOption .btnRemoveOption {
-    background-color: rgb(230, 99, 99);
-    padding-bottom: 3.5px;
+   background-color: rgb(230, 99, 99);
+   padding-bottom: 3.5px;
 }
 
-.votingOption input[type="text"] {
-    margin-left: 6px;
+.votingOption input[type='text'] {
+   margin-left: 6px;
 }
 
 .votingOption .optionInfo {
-    display: flex;
-    justify-content: space-between;
+   display: flex;
+   justify-content: space-between;
+}
+
+.votingOption .optionInfo .optionNameWrapper {
+   /* border: 1px solid red; */
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   margin-left: 12px;
+}
+
+.votingOption .optionInfo .optionNameWrapper span {
+   /* border: 1px solid lime; */
+   height: 1em;
+   display: block;
 }
 
 .votingOption .percentageBar {
-    background-color: white;
-    opacity: 0.2;
-    position: absolute;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    border-radius: 6px;
-    /* max-width will get changed to % of vote when the voteCounts arrive in .votingOption */
-    max-width: 0%;
-    transition: 0.3s all ease;
+   background-color: white;
+   opacity: 0.2;
+   position: absolute;
+   right: 0;
+   height: 100%;
+   width: 100%;
+   border-radius: 6px;
+   /* max-width will get changed to % of vote when the voteCounts arrive in .votingOption */
+   max-width: 0%;
+   transition: 0.3s all ease;
 }
 
 .votingOption .voteStats {
-    /* border: 1px solid lime; */
-    margin-right: -40%;
-    display: flex;
+   /* border: 1px solid lime; */
+   margin-right: -40%;
+   display: flex;
+   justify-content: center;
+   gap: 12px;
+}
+
+.votingOption .voteStats .voteStatWrapper {
+   /* border: 1px solid lightblue; */
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}
+
+.votingOption .voteStats span {
+   /* border: 1px solid gold; */
+   display: block;
+   height: 1em;
 }
 
 .votingOption input:not(:focus)::placeholder {
-    opacity: 1;
-    font-size: 1rem;
+   opacity: 1;
+   font-size: 1rem;
 }
 
 .votingOption button {
-    display: block;
-    border: none;
-    outline: none;
+   display: block;
+   border: none;
+   outline: none;
 }
 
 .votingOptionAdder {
-    border: 1px dashed rgba(255, 255, 255, 0.25);
-    background: none;
+   border: 1px dashed rgba(255, 255, 255, 0.25);
+   background: none;
 }
 
-.votingOptionAdder input[type="text"] {
-    background-color: transparent;
-    color: white;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-family: "Helvetica";
+.votingOptionAdder input[type='text'] {
+   background-color: transparent;
+   color: white;
+   border-radius: 6px;
+   font-size: 1rem;
+   font-family: 'Helvetica';
 }
 
-.votingOptionAdder input[type="text"]::placeholder {
-    color: white;
+.votingOptionAdder input[type='text']::placeholder {
+   color: white;
 }

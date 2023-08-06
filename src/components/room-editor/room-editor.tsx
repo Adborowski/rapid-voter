@@ -69,6 +69,7 @@ const RoomEditor = (props: any) => {
                         key={option}
                         removable={true}
                         removeOptionHandler={removeOptionHandler}
+                        userAlreadyVoted={false}
                     />
                 ))}
                 <VotingOptionAdder addOptionHandler={addOptionHandler} />

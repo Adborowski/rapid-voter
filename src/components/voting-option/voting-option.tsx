@@ -15,7 +15,7 @@ interface VotingOptionProps {
     removeOptionHandler?: (name: string) => any;
     voteHandler?: (name: string) => any;
     voteCounts?: VoteCount;
-    userAlreadyVoted: Boolean;
+    userAlreadyVoted: boolean;
 }
 
 const VotingOption = (props: VotingOptionProps) => {

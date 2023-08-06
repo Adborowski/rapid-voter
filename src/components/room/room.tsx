@@ -27,7 +27,7 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
     const [selectedOption, setSelectedOption] = useState();
     const [roomVotes, setRoomVotes] = useState<any[]>(); // all raw votes for the room
     const [voteCounts, setVoteCounts] = useState<VoteCount>(); // neatly counted votes, an obj of {option: count} items
-    const [userAlreadyVoted, setUserAlreadyVoted] = useState<Boolean>(false);
+    const [userAlreadyVoted, setUserAlreadyVoted] = useState<boolean>(false);
 
     useEffect(() => {
         if (roomVotes) {

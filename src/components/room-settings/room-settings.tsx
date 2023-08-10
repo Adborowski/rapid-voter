@@ -23,17 +23,20 @@ const RoomSettings = () => {
    ]
    return (
       <div className={styles.roomSettings}>
-         {availableSettings.map((setting) => {
-            return (
-               <section className={styles.settingWrapper}>
-                  <header>
-                     <span>{setting.name}</span>
-                     <input type={setting.inputType} />
-                  </header>
-                  <article>{setting.description}</article>
-               </section>
-            )
-         })}
+         <details>
+            <summary>Room settings</summary>
+            {availableSettings.map((setting) => {
+               return (
+                  <section className={styles.settingWrapper}>
+                     <header>
+                        <span>{setting.name}</span>
+                        <input type={setting.inputType} />
+                     </header>
+                     <article>{setting.description}</article>
+                  </section>
+               )
+            })}
+         </details>
       </div>
    )
 }

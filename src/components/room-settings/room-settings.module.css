@@ -28,3 +28,11 @@
    color: white;
    margin-top: 12px;
 }
+
+.roomSettings details {
+   margin-top: 12px;
+}
+.roomSettings summary {
+   color: white;
+   text-align: center;
+}

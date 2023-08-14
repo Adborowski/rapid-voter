@@ -1,5 +1,5 @@
 import styles from './room-settings.module.css'
-import { RoomSetting, SettingComponentProps } from '@/utils/types'
+import { SettingComponentProps } from '@/utils/types'
 
 const SettingLoginRequired = ({ setting, updateRoomSettings }: SettingComponentProps) => {
    return (

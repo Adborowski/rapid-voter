@@ -1,7 +1,29 @@
 import styles from './room-settings.module.css'
-import { RoomSetting, SettingComponentProps } from '@/utils/types'
+import { useState, useEffect } from 'react'
+import { SettingComponentProps } from '@/utils/types'
 
 const SettingTimeLimit = ({ setting, updateRoomSettings }: SettingComponentProps) => {
+   const [isActivated, setIsActivated] = useState(false)
+   const [selectedDate, setSelectedDate] = useState<Date | boolean>(false)
+
+   useEffect(() => {
+      if (!isActivated) {
+         updateRoomSettings({ settingKey: 'time_limit', settingValue: false })
+      } else {
+         updateRoomSettings({ settingKey: 'time_limit', settingValue: selectedDate })
+      }
+   }, [isActivated, selectedDate])
+
+   const getDefaultDateString = () => {
+      const date = new Date() // today
+      date.setDate(date.getDate() + 30) // set to 30 days later
+      const y = date.getFullYear()
+      const m = '0' + (date.getMonth() + 1)
+      const d = date.getDate()
+      const defaultDateString = y + '-' + m + '-' + d
+      return defaultDateString
+   }
+
    return (
       <section key={setting.name} className={styles.settingWrapper}>
          <header>
@@ -9,23 +31,22 @@ const SettingTimeLimit = ({ setting, updateRoomSettings }: SettingComponentProps
             <input
                type={setting.inputType}
                onChange={(event) => {
-                  if (!setting.extraInputType) {
-                     updateRoomSettings({
-                        settingKey: setting.dataName,
-                        settingValue: event.target.checked,
-                     })
+                  if (event.target.checked) {
+                     setIsActivated(true)
+                     setSelectedDate(new Date(getDefaultDateString()))
+                  } else {
+                     setIsActivated(false)
+                     setSelectedDate(false)
                   }
                }}
             />
          </header>
          <article>{setting.description}</article>
-         {setting.extraInputType && (
+         {setting.extraInputType && isActivated && (
             <input
+               defaultValue={getDefaultDateString()}
                onChange={(event) => {
-                  updateRoomSettings({
-                     settingKey: setting.dataName,
-                     settingValue: new Date(event.target.value),
-                  })
+                  setSelectedDate(new Date(event.target.value))
                }}
                type={setting.extraInputType}
             />

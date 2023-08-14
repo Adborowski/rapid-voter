@@ -44,6 +44,7 @@ const SettingTimeLimit = ({ setting, updateRoomSettings }: SettingComponentProps
          <article>{setting.description}</article>
          {setting.extraInputType && isActivated && (
             <input
+               className={styles.settingDateInput}
                defaultValue={getDefaultDateString()}
                onChange={(event) => {
                   setSelectedDate(new Date(event.target.value))

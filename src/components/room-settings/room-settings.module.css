@@ -6,8 +6,10 @@
 .settingWrapper {
    padding: 12px;
    background-color: rgba(255, 255, 255, 0.1);
+   border-radius: 3px;
    margin-bottom: 12px;
 }
+
 .settingWrapper header span {
    color: white;
    font-size: 1.2rem;
@@ -15,6 +17,7 @@
 }
 
 .settingWrapper input[type='checkbox'] {
+   accent-color: rgb(255, 242, 169);
    display: inline;
    height: 20px;
    width: 20px;
@@ -26,17 +29,19 @@
    margin-top: 12px;
 }
 
-.btnRoomSettings {
+.btnShowRoomSettings {
    margin-bottom: 12px;
+   background-color: transparent;
+   color: white;
 }
 
 .availableSettings {
    overflow: hidden;
-   transition: 0.5s all ease;
+   transition: 0.5s all;
 }
 
 .availableSettings.open {
-   max-height: 1000px;
+   max-height: 294px;
 }
 
 .availableSettings.closed {
@@ -46,20 +51,12 @@
 .settingDateInput {
    background: none;
    border: none;
-   margin-top: 12px;
+   margin-top: 18px;
    color: white;
    font-size: 1.1rem;
    position: relative;
+   width: 100%;
 }
-
-/* ::-webkit-datetime-edit
-::-webkit-datetime-edit-fields-wrapper
-::-webkit-datetime-edit-text
-::-webkit-datetime-edit-month-field
-::-webkit-datetime-edit-day-field
-::-webkit-datetime-edit-year-field
-::-webkit-inner-spin-button
-::-webkit-calendar-picker-indicator */
 
 .settingDateInput::-webkit-datetime-edit {
    padding: 12px;
@@ -68,6 +65,7 @@
    background-color: rgb(255, 242, 169);
    color: black;
    font-weight: 600;
+   font-size: 1rem;
 }
 
 /* pseudo element that has the click event for opening the native calendar */

@@ -8,7 +8,7 @@ const SettingTimeLimit = ({ setting, updateRoomSettings }: SettingComponentProps
 
    useEffect(() => {
       if (!isActivated) {
-         updateRoomSettings({ settingKey: 'time_limit', settingValue: false })
+         updateRoomSettings({ settingKey: 'time_limit', settingValue: null })
       } else {
          updateRoomSettings({ settingKey: 'time_limit', settingValue: selectedDate })
       }

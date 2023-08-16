@@ -49,3 +49,18 @@
 .resetButton {
    background-color: yellow !important;
 }
+
+.displayTimeLimit {
+   display: block;
+   color: white;
+   text-align: center;
+   font-size: 0.8rem;
+   margin-bottom: 12px;
+}
+
+.displayTimeLimit aside {
+   margin-bottom: 3px;
+}
+
+.displayTimeLimit time {
+}

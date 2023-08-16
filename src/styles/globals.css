@@ -1,12 +1,12 @@
 * {
-    font-family: "Helvetica";
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+   font-family: 'Helvetica';
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
 }
 
 html {
-    font-size: 14px;
+   font-size: 14px;
 }
 
 h1,
@@ -15,50 +15,46 @@ h3,
 h4,
 h5,
 h6 {
-    all: unset;
+   all: unset;
 }
 
 body {
-    background: rgb(12, 19, 89);
-    background: linear-gradient(
-        180deg,
-        rgba(12, 19, 89, 1) 0%,
-        rgba(73, 36, 130, 1) 81%
-    );
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+   background: rgb(12, 19, 89);
+   background: linear-gradient(180deg, rgba(12, 19, 89, 1) 0%, rgba(73, 36, 130, 1) 81%);
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
 }
 
 a,
 a:visited {
-    text-decoration: none;
-    color: unset;
+   text-decoration: none;
+   color: unset;
 }
 
 button {
-    font-size: 1.2rem;
-    font-weight: 700;
-    border: none;
-    background-color: rgb(255, 242, 169);
-    padding: 12px;
-    border-radius: 6px;
-    text-align: center;
-    font-size: 1rem;
-    display: block;
-    width: 100%;
-    cursor: pointer;
+   font-size: 1.2rem;
+   font-weight: 700;
+   border: none;
+   background-color: rgb(255, 242, 169);
+   padding: 12px;
+   border-radius: 6px;
+   text-align: center;
+   font-size: 1rem;
+   display: block;
+   width: 100%;
+   cursor: pointer;
 }
 
 button:disabled {
-    background-color: rgba(145, 145, 145, 0.25);
+   background-color: rgba(145, 145, 145, 0.25);
 }
 
 input:focus {
-    outline: none;
+   outline: none;
 }
 
 input:focus::placeholder {
-    opacity: 0;
+   opacity: 0;
 }

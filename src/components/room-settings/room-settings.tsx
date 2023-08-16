@@ -4,24 +4,12 @@ import SettingLoginRequired from './setting-login-required'
 import { RoomSetting } from '@/utils/types'
 import SettingTimeLimit from './setting-time-limit'
 
-const RoomSettings = () => {
+interface RoomSettingsComponentProps {
+   updateRoomSettings: Function
+}
+
+const RoomSettings = ({ updateRoomSettings }: RoomSettingsComponentProps) => {
    const [isOpen, setIsOpen] = useState(false)
-   const [roomSettings, setRoomSettings] = useState({
-      login_required: false,
-      time_limit: false,
-   })
-
-   interface SettingUpdate {
-      settingKey: string
-      settingValue: boolean | Date
-   }
-
-   const updateRoomSettings = (settingUpdate: SettingUpdate) => {
-      setRoomSettings((prevState) => {
-         console.log({ ...prevState, [settingUpdate.settingKey]: settingUpdate.settingValue })
-         return { ...prevState, [settingUpdate.settingKey]: settingUpdate.settingValue }
-      })
-   }
 
    const availableSettings: RoomSetting[] = [
       {
@@ -35,7 +23,7 @@ const RoomSettings = () => {
          name: 'Time limit',
          dataName: 'time_limit',
          description:
-            'Room will only be open to voting before the passing of a date you set. After the date passes, voting will not be possible',
+            'Room will become closed on the set date. The closing date will be visible to the users.',
          inputType: 'checkbox',
          extraInputType: 'date',
       },
@@ -46,7 +34,7 @@ const RoomSettings = () => {
             onClick={() => {
                setIsOpen(!isOpen)
             }}
-            className={styles.btnRoomSettings}
+            className={styles.btnShowRoomSettings}
          >
             {isOpen ? 'Hide room settings' : 'Show room settings'}
          </button>

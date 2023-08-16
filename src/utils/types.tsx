@@ -10,3 +10,13 @@ export interface SettingComponentProps {
    setting: RoomSetting
    updateRoomSettings: Function
 }
+
+export interface SettingUpdate {
+   settingKey: string
+   settingValue: boolean | Date
+}
+
+export interface AvailableRoomSettings {
+   login_required: boolean
+   time_limit: string
+}

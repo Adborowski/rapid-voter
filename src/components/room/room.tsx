@@ -1,6 +1,8 @@
 import styles from './room.module.css'
 import VotingOption from '../voting-option/voting-option'
 import { FormEvent, useState, useEffect } from 'react'
+import { AvailableRoomSettings } from '@/utils/types'
+import DisplayTimeLimit from './display-time-limit'
 
 type VotingRoomData = {
    votingRoomData: {
@@ -8,6 +10,7 @@ type VotingRoomData = {
       roomName: string
       votingOptions: string[]
       creationTime: number
+      roomSettings: AvailableRoomSettings
    }
 }
 
@@ -22,8 +25,9 @@ interface VoteCount {
 }
 
 const Room = ({ votingRoomData }: VotingRoomData) => {
-   const { roomId, roomName, votingOptions, creationTime } = votingRoomData
-   const readableDate = new Date(creationTime).toLocaleString()
+   const { roomId, roomName, votingOptions, creationTime, roomSettings } = votingRoomData
+   const { login_required, time_limit } = roomSettings
+   const readableCreationDate = new Date(creationTime).toLocaleString()
    const [selectedOption, setSelectedOption] = useState()
    const [roomVotes, setRoomVotes] = useState<any[]>() // all raw votes for the room
    const [voteCounts, setVoteCounts] = useState<VoteCount>() // neatly counted votes, an obj of {option: count} items
@@ -62,7 +66,6 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
    }
 
    const handleChange = (e: any) => {
-      console.log('handleChange')
       setSelectedOption(e.target.value)
    }
 
@@ -113,8 +116,10 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
       <section className={styles.room}>
          <header>
             <h1>{roomName}</h1>
-            <time>{readableDate}</time>
+            <time>{readableCreationDate}</time>
          </header>
+
+         {time_limit && <DisplayTimeLimit timeLimit={time_limit} />}
 
          <form onChange={handleChange} onSubmit={submitVote}>
             {votingOptions.map((option) => {

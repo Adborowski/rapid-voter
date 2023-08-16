@@ -5,12 +5,25 @@ import VotingOptionAdder from '../voting-option/voting-option-adder'
 import RoomLink from '../room-link/room-link'
 import { v4 as uuidv4 } from 'uuid'
 import RoomSettings from '../room-settings/room-settings'
+import { SettingUpdate } from '@/utils/types'
 
 const RoomEditor = (props: any) => {
    const [votingOptions, setVotingOptions] = useState<string[]>([])
    const [roomId, setRoomId] = useState() // roomId gets set once a room has been created (it's in the api response)
    const [isSaving, setIsSaving] = useState<Boolean>()
    const [roomName, setRoomName] = useState<String>()
+
+   const [roomSettings, setRoomSettings] = useState({
+      login_required: false,
+      time_limit: null,
+   })
+
+   const updateRoomSettings = (settingUpdate: SettingUpdate) => {
+      setRoomSettings((prevState) => {
+         console.log({ ...prevState, [settingUpdate.settingKey]: settingUpdate.settingValue })
+         return { ...prevState, [settingUpdate.settingKey]: settingUpdate.settingValue }
+      })
+   }
 
    const addOptionHandler = (newOption: string) => {
       if (!votingOptions.includes(newOption)) {
@@ -32,6 +45,7 @@ const RoomEditor = (props: any) => {
          creationTime: Date.now(),
          roomId: uuidv4(),
          votingOptions: votingOptions,
+         roomSettings: roomSettings,
       }
 
       fetch('/api/create-room', {
@@ -87,7 +101,7 @@ const RoomEditor = (props: any) => {
                </button>
             )}
          </div>
-         {!roomId && <RoomSettings />}
+         {!roomId && <RoomSettings updateRoomSettings={updateRoomSettings} />}
          {roomId && <RoomLink roomId={roomId} />}
       </div>
    )

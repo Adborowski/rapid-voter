@@ -14,7 +14,7 @@
    margin-bottom: 6px;
 }
 
-.votingOption:hover {
+.votingOption:not(.votingDisabled):hover {
    background-color: rgba(255, 255, 255, 0.3);
    cursor: pointer;
 }
@@ -54,7 +54,8 @@
    background-color: white;
 }
 
-.votingOption input[type='radio']:checked::after {
+.votingOption input[type='radio']:checked::after,
+.votingOption.votingDisabled input[type='radio'][checked]::after {
    content: ' ';
    position: absolute;
    top: 0;
@@ -83,6 +84,21 @@
    background: radial-gradient(circle, rgba(255, 255, 255, 1) 5%, rgba(128, 255, 139, 0.5) 80%);
    mix-blend-mode: darken;
    animation: fadeIn 1s ease forwards;
+}
+
+/* only [checked] works for a controlled check from above, :checked does not (it only works with checking thru interaction)
+this only covers the option which was REMEMBERED from localstorage/user data, not immediate post-vote checking */
+
+.votingOption.votingDisabled input[type='radio'][checked]::after {
+   filter: invert(1);
+}
+
+.votingOption.votingDisabled input[type='radio']:checked::before {
+   background: transparent;
+}
+
+.votingOption.votingDisabled input[type='radio']:checked:after {
+   filter: invert(1);
 }
 
 @keyframes fadeIn {
@@ -184,6 +200,11 @@
    display: block;
    border: none;
    outline: none;
+}
+
+.votingOption.votingDisabled input[type='radio'] {
+   background-color: rgba(255, 255, 255, 0);
+   border: 1px dashed rgba(255, 255, 255, 0.25);
 }
 
 .votingOptionAdder {

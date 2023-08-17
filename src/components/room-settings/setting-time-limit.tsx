@@ -14,13 +14,17 @@ const SettingTimeLimit = ({ setting, updateRoomSettings }: SettingComponentProps
       }
    }, [isActivated, selectedDate])
 
+   // yyyy-MM-ddThh:mm
    const getDefaultDateString = () => {
       const date = new Date() // today
       date.setDate(date.getDate() + 30) // set to 30 days later
-      const y = date.getFullYear()
-      const m = '0' + (date.getMonth() + 1)
-      const d = date.getDate()
-      const defaultDateString = y + '-' + m + '-' + d
+      const year = date.getFullYear()
+      const month = '0' + (date.getMonth() + 1)
+      const day = date.getDate()
+      const hours = date.getHours()
+      const minutes = date.getMinutes()
+      const defaultDateString = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes
+      console.log('defaultDateString', defaultDateString)
       return defaultDateString
    }
 

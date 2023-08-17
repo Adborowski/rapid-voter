@@ -16,10 +16,20 @@ interface VotingOptionProps {
    voteHandler?: (name: string) => any
    voteCounts?: VoteCount
    userAlreadyVoted: boolean
+   enabled: boolean
+   previouslySelectedOption?: string
 }
 
 const VotingOption = (props: VotingOptionProps) => {
-   const { name, removable, removeOptionHandler, voteCounts, userAlreadyVoted } = props
+   const {
+      name,
+      removable,
+      removeOptionHandler,
+      voteCounts,
+      userAlreadyVoted,
+      enabled,
+      previouslySelectedOption,
+   } = props
 
    // sum the votecount and arrive at one number
    // used to determine % of vote
@@ -43,7 +53,9 @@ const VotingOption = (props: VotingOptionProps) => {
    return (
       <label
          htmlFor={name}
-         className={`${styles.votingOption} ${removable ? styles.removable : ''}`}
+         className={`${styles.votingOption} ${removable ? styles.removable : ''} ${
+            !enabled ? styles.votingDisabled : ''
+         }`}
          onClick={() => {
             removeOptionHandler ? removeOptionHandler(name) : ''
          }}
@@ -57,7 +69,8 @@ const VotingOption = (props: VotingOptionProps) => {
                value={name}
                name="votingOption"
                type="radio"
-               disabled={userAlreadyVoted}
+               defaultChecked={previouslySelectedOption === name ? true : false}
+               disabled={!enabled}
             />
          )}
          <div className={styles.optionInfo}>

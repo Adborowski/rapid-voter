@@ -25,7 +25,7 @@ const RoomSettings = ({ updateRoomSettings }: RoomSettingsComponentProps) => {
          description:
             'Room will become closed on the set date. The closing date will be visible to the users.',
          inputType: 'checkbox',
-         extraInputType: 'date',
+         extraInputType: 'datetime-local',
       },
    ]
    return (

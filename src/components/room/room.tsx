@@ -3,6 +3,7 @@ import VotingOption from '../voting-option/voting-option'
 import { FormEvent, useState, useEffect } from 'react'
 import { AvailableRoomSettings } from '@/utils/types'
 import DisplayTimeLimit from './display-time-limit'
+import { hasTimeLimitElapsed } from '@/utils/time-util'
 
 type VotingRoomData = {
    votingRoomData: {
@@ -28,10 +29,11 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
    const { roomId, roomName, votingOptions, creationTime, roomSettings } = votingRoomData
    const { login_required, time_limit } = roomSettings
    const readableCreationDate = new Date(creationTime).toLocaleString()
-   const [selectedOption, setSelectedOption] = useState()
+   const [selectedOption, setSelectedOption] = useState<string>()
    const [roomVotes, setRoomVotes] = useState<any[]>() // all raw votes for the room
    const [voteCounts, setVoteCounts] = useState<VoteCount>() // neatly counted votes, an obj of {option: count} items
    const [userAlreadyVoted, setUserAlreadyVoted] = useState<boolean>(false)
+   const [votingEnabled, setVotingEnabled] = useState<boolean>(true)
 
    useEffect(() => {
       if (roomVotes) {
@@ -43,9 +45,19 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
    }, [roomVotes])
 
    useEffect(() => {
-      console.log('User voted already?', localStorage.getItem(roomId))
       if (localStorage.getItem(roomId)) {
+         const previouslySelectedOption = localStorage.getItem(roomId)
+         console.log(`%cUser has voted already for: ${previouslySelectedOption}.`, 'color: yellow')
          setUserAlreadyVoted(true)
+         setVotingEnabled(false)
+         getRoomVotes(roomId)
+         if (previouslySelectedOption) {
+            setSelectedOption(previouslySelectedOption) // does not work
+         }
+      }
+
+      if (hasTimeLimitElapsed(time_limit)) {
+         setVotingEnabled(false)
          getRoomVotes(roomId)
       }
    }, [])
@@ -88,9 +100,10 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
             console.log('[submit-vote]', data)
             getRoomVotes(roomId)
             setUserAlreadyVoted(true)
+            setVotingEnabled(false)
 
-            if (data.acknowledged) {
-               localStorage.setItem(roomId, '1')
+            if (data.acknowledged && selectedOption) {
+               localStorage.setItem(roomId, selectedOption)
             }
          })
    }
@@ -129,6 +142,8 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
                      key={option}
                      name={option}
                      userAlreadyVoted={userAlreadyVoted}
+                     enabled={votingEnabled}
+                     previouslySelectedOption={selectedOption}
                   />
                )
             })}
@@ -148,9 +163,10 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
                         className={styles.resetButton}
                         onClick={() => {
                            setUserAlreadyVoted(false)
+                           setVotingEnabled(true)
                         }}
                      >
-                        Reset
+                        [DEV] Enable voting
                      </button>
                   </div>
                )}

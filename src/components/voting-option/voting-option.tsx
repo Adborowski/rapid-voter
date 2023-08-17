@@ -1,3 +1,4 @@
+import { use } from 'react'
 import styles from './voting-option.module.css'
 
 interface VoteCount {
@@ -30,6 +31,13 @@ const VotingOption = (props: VotingOptionProps) => {
       enabled,
       previouslySelectedOption,
    } = props
+
+   console.log({
+      name: name,
+      enabled: enabled,
+      userAlreadyVoted: userAlreadyVoted,
+      previouslySelectedOption: previouslySelectedOption,
+   })
 
    // sum the votecount and arrive at one number
    // used to determine % of vote

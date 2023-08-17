@@ -56,7 +56,7 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
          }
       }
 
-      if (hasTimeLimitElapsed(time_limit)) {
+      if (time_limit && hasTimeLimitElapsed(time_limit)) {
          setVotingEnabled(false)
          getRoomVotes(roomId)
       }
@@ -158,7 +158,7 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
 
                {userAlreadyVoted && (
                   <div className={styles.infoUserAlreadyVoted}>
-                     <span>You have voted.</span>
+                     <span>You have voted for: {selectedOption}</span>
                      <button
                         className={styles.resetButton}
                         onClick={() => {

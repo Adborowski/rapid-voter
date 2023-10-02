@@ -1,3 +1,4 @@
+// @ts-ignore
 import QRCode from 'react-qr-code'
 import styles from './room-sharing.module.css'
 

@@ -4,6 +4,7 @@ import { FormEvent, useState, useEffect } from 'react'
 import { AvailableRoomSettings } from '@/utils/types'
 import DisplayTimeLimit from './display-time-limit'
 import { hasTimeLimitElapsed } from '@/utils/time-util'
+import RoomSharing from '../room-sharing/room-sharing'
 
 type VotingRoomData = {
    votingRoomData: {
@@ -170,6 +171,8 @@ const Room = ({ votingRoomData }: VotingRoomData) => {
                      </button>
                   </div>
                )}
+
+               <RoomSharing />
             </div>
          </form>
       </section>

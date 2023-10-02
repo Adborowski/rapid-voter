@@ -11,10 +11,6 @@ const DisplayTimeLimit = ({ timeLimit }: DisplayTimeLimitProps) => {
       return null
    }
 
-   if (typeof timeLimit === 'string') {
-      console.log(new Date(timeLimit).toDateString())
-   }
-
    const countdownRenderer = ({ days, minutes, hours, seconds, completed }: any) => {
       if (!completed) {
          return (

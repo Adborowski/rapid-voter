@@ -1,0 +1,11 @@
+.roomSharing {
+   transition: 0.5s ease all;
+   background: white;
+   padding: 10px 30px;
+   margin-top: 18px;
+   border-radius: 6px;
+}
+
+.roomSharing > * {
+   width: 100%;
+}
